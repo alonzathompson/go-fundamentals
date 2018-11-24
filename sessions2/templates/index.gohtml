@@ -1,0 +1,24 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>My first Session</title>
+    </head>
+    <body>
+        <form method="post">
+            <input type="email" name="username" placeholder="email">
+            <input type="text" name="firstname" placeholder="first">
+            <input type="text" name="lastname" placeholder="last">
+            <input type="submit">
+        </form>
+
+        {{ if .First}}
+            UserName {{.UserName}}<br>
+            First {{.First}}</br>
+            Last {{.Last}}</br>
+        {{end}}
+
+        <br>
+        <h2>Go to <a href="/bar">the bar</h2>
+    </body>
+</html>

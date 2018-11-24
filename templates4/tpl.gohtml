@@ -1,0 +1,22 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+        {{range .}}
+        {{uc .Name}}
+        {{end}}
+        <ul>
+            <!-- Looping construct in template; Range is loop, . is the data
+            note!! the . is how the data first comes to the template
+            inbetween range and end will be a new pice of data until there
+            is no data left.-->
+        {{range .}}
+        <li>{{.}}</li>
+        {{end}}
+        </ul>
+    </body>
+</html>

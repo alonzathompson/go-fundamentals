@@ -1,0 +1,18 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>bart</title>
+    </head>
+    <body>
+        <h1>Welcome to the Foo page. Ready to Fight?</h1>
+
+        {{if .First}}
+            UserName {{.UserName}}<br>
+            Password {{.Password}}<br>
+            Role {{.Role}}<br>
+            First {{.First}}<br>
+            Last  {{.Last}}<br>
+        {{end}}
+    </body>
+</html>
