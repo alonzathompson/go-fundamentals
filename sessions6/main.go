@@ -109,6 +109,7 @@ func signup(w http.ResponseWriter, req *http.Request) {
 		if err != nil {
 			log.Fatalln(err)
 		}
+
 		c := &http.Cookie{
 			Name:  "session",
 			Value: sID.String(),

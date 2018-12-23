@@ -1,37 +1,32 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 
+	"html/template"
+
 	"github.com/alonzathompson/go-fundamentals/mvcpattern/controllers"
-	"github.com/julienschmidt/httprouter"
+	//"github.com/julienschmidt/httprouter"
 )
 
-func main() {
-	r := httprouter.New()
-	uc := userController.NewUserController()
+var tpl *template.Template
 
-	r.GET("/", home)
-	r.GET("/user/:id", uc.GetUser)
-	r.GET("/users", uc.GetUsers)
-	r.POST("/user/create", uc.CreateUser)
-	r.DELETE("/user/delete/:id", uc.DeleteUser)
-
-	http.ListenAndServe(":8080", r)
+func init() {
+	tpl = template.Must(template.ParseGlob("templates/*"))
 }
 
-func home(w http.ResponseWriter, req *http.Request, p httprouter.Params) {
-	s := `
-	<!Doctype html>
-	<html lang="en">
-	<head>
-	</head>
-	<body>
-	<h1>Welcome</h1>
-	</body>
-	</html>
-	`
+func main() {
+	//r := httprouter.New()
+	c := controllers.NewController(tpl)
 
-	fmt.Fprintf(w, "%s\n", s)
+	http.HandleFunc("/", c.Index)
+	http.HandleFunc("/login", c.Login)
+	http.HandleFunc("/signup", c.SignUp)
+	http.HandleFunc("/logout", c.Logout)
+	http.HandleFunc("/bar", c.Bar)
+	http.HandleFunc("/foo", c.Foo)
+
+	//http.Handle("/favicon.ico", http.NotFoundHandler())
+	//http.Handle("/resources/", http.StripPrefix("/resources", http.FileServer(http.Dir("./assets"))))
+	http.ListenAndServe(":8080", nil)
 }

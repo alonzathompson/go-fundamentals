@@ -1,0 +1,18 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>bart</title>
+    </head>
+    <body>
+        <h1>Welcome to the bar page. What can I get you?</h1>
+
+        {{if .First}}
+            UserName {{.UserName}}
+            Password {{.Password}}
+            Role {{.Role}}
+            First {{.First}}
+            Last  {{.Last}}
+        {{end}}
+    </body>
+</html>

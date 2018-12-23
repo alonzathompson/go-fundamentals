@@ -54,7 +54,7 @@ func main() {
 
 	http.Handle("/favicon.ico", http.NotFoundHandler())
 	http.Handle("/resources/", http.StripPrefix("/resources", http.FileServer(http.Dir("./assets"))))
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8090", nil)
 }
 
 func index(w http.ResponseWriter, req *http.Request) {
