@@ -17,7 +17,7 @@ type Person struct {
 }
 
 //url string
-const MLABURL = "mongodb://arAdm:adminpass1@ds241658.mlab.com:41658/godata"
+const MLABURL = <Your mongo lab id goes here>
 
 func handleMongo() {
 	fmt.Println("Testing mlab database")
