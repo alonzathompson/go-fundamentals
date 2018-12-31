@@ -17,7 +17,8 @@ message CustomerRequest {
   int32 id = 1;  // Unique ID number for a Customer.
   string name = 2;
   string email = 3;
-  string phone= 4;
+  string password = 4;
+  string phone= 5;
   
   message Address {
     string street = 1;

@@ -75,5 +75,6 @@ func ParseJWT(t metadata.MD) (*jwt.Token, error) {
 
 /*********
 things to REMEMBER
---The Generate token should be used in /signup /login - or routes with data exchanges
+--The Generate token should be used in /signup
+--Or routes that need token generation
 **********/

@@ -30,6 +30,8 @@ type server struct {
 
 var msg *pb.CustomerRequest
 
+var u string
+
 // CreateCustomer creates a new Customer
 /*
 Notice that we start from a struct and then attatch
@@ -45,14 +47,17 @@ func (s *server) CreateCustomer(ctx context.Context, in *pb.CustomerRequest) (*p
 
 	//Parsed the jwt
 	t, err := auth.ParseJWT(md)
+	fmt.Printf("%T", t)
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	//Must map the claims in order to get value by key
 	claims := t.Claims.(jwt.MapClaims)
-	fmt.Println(claims)
-	ctx = metadata.AppendToOutgoingContext(context.Background(), "user", claims["usr"].(string))
+	//j = &claims
+	u = claims["usr"].(string)
+	//fmt.Printf("%T %T %T", claims["usr"], claims["exp"], claims["authorized"])
+
 	s.savedCustomers = append(s.savedCustomers, in)
 	testRun(ctx, in)
 
@@ -73,8 +78,10 @@ func (s *server) ForwardCustomer(ctx context.Context, in *pb.CustomerRequest) (*
 func forwardCustomer(ctx context.Context, client pb.CustomerClient, in *pb.CustomerRequest) {
 	// Creates a new CustomerClient
 	fmt.Println("ForwardCustomer Forwarding...")
+	ctx = metadata.AppendToOutgoingContext(context.Background(), "usr", u)
+
 	//End of important part
-	resp, err := client.ForwardCustomer(context.Background(), in)
+	resp, err := client.ForwardCustomer(ctx, in)
 	if err != nil {
 		log.Fatalf("Could not Forward: %v", err)
 	}

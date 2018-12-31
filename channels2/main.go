@@ -5,31 +5,35 @@ import (
 	"sync"
 )
 
-type cInfo struct {
+//CInfo -Example Car Info Object
+type CInfo struct {
 	make  string
 	model string
 }
 
-var cars []cInfo
+//Cars Slice of struct Car info
+var Cars []CInfo
 
+// creating wait
 var wg = sync.WaitGroup{}
 
-func addCar(c chan<- cInfo, b cInfo) {
+//SendCar adds Car Info object (CInfo) to car channel stream
+func SendCar(c chan<- CInfo, b CInfo) {
+	fmt.Printf("adding car... %+v\n", b)
 	c <- b
-	close(c)
 	wg.Done()
 }
 
 func main() {
 	wg.Add(1)
-	ch := make(chan cInfo)
+	ch := make(chan CInfo)
 
-	car := cInfo{
+	car := CInfo{
 		make:  "Pontiac",
 		model: "g6",
 	}
 
-	go addCar(ch, car)
+	go SendCar(ch, car)
 	fmt.Println("from main println", <-ch, car)
 
 	//fmt.Println(car, ch)
